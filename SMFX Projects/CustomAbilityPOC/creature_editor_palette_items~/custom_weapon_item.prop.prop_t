@@ -1,0 +1,20 @@
+int32s palettePagePartItemColumns
+	0
+	0
+	0
+	0
+	1
+	1
+end
+int32s palettePagePartItemRows
+	0
+	1
+	2
+	3
+	0
+	1
+end
+keys palettePagePartItems
+	creature_parts~!ce_custom
+end
+key palettePagePartParentPage creature_editor_palette_pages~!custom_weapon_page

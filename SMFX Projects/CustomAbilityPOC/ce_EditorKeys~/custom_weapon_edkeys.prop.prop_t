@@ -1,0 +1,4 @@
+key parent Adventure_brushes~!TemplateManifest.prop
+keys validEditorKeys
+	creature_parts~!ce_custom
+end

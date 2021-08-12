@@ -1,0 +1,10 @@
+version 10
+
+anim CustomAbilityPOC "custom_attack"
+	endMode 1
+	allowLocomotion true
+
+	choice -probability 1
+		animation "custom_attack"
+	end
+end

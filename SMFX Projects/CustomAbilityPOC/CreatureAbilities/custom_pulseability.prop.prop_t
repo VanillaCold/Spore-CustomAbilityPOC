@@ -1,0 +1,21 @@
+key parent creatureabilityTemplates~!SpitTemplate
+float creatureAbilityAdventurerEnergyCost 0
+uint32s creatureAbilityAnimationIDs
+	0x8C264220
+end
+uint32 creatureAbilityBabyGameAnimationID 0x07620ddb
+float creatureAbilityDamage 0
+texts creatureAbilityDescription
+	"This ability should run custom code when used"
+end
+uint32 creatureAbilityImpactEffectId 0
+uint32 creatureAbilityMuzzleEffectId 0
+texts creatureAbilityName
+	"Custom Ability Test"
+end
+float creatureAbilityRazeDamage 0
+float creatureAbilityRefresh 2.5
+vector2s creatureAbilityRequiredCAPsMaxValueRange
+	(71, 71)
+end
+key verbIconRepresentativeAnimation 0x079992D7
