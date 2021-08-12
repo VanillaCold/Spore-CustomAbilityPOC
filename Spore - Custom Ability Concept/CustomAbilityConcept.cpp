@@ -61,7 +61,7 @@ bool CustomAbilityConcept::HandleMessage(uint32_t messageID, void* msg)
 			if (crt != nullptr)
 			{
 				//SporeDebugPrint("%i", crt->field_E7C); //
-				target = (Simulator::cCombatant*)crt->field_E7C; //field_E7C seems to be the target
+				target = crt->mpCombatantTarget;//field_E7C; //field_E7C seems to be the target
 				auto pos2 = target->ToSpatialObject()->GetPosition();
 				SporeDebugPrint("Position of combatant that was targetted by player: X = %f, Y = %f, Z = %f", pos2.x, pos2.y, pos2.z); //print the creature's position to the debug console
 			}
