@@ -1,38 +1,39 @@
 #include "stdafx.h"
-#include "CustomAbilityConcept.h"
+#include "AbilityManager.h"
 #include <Spore\Anim\AnimatedCreature.h>
 
-CustomAbilityConcept::CustomAbilityConcept()
+AbilityManager::AbilityManager()
 {
 }
 
 
-CustomAbilityConcept::~CustomAbilityConcept()
+AbilityManager::~AbilityManager()
 {
 }
 
 // For internal use, do not modify.
-int CustomAbilityConcept::AddRef()
+int AbilityManager::AddRef()
 {
 	return DefaultRefCounted::AddRef();
 }
 
 // For internal use, do not modify.
-int CustomAbilityConcept::Release()
+int AbilityManager::Release()
 {
 	return DefaultRefCounted::Release();
 }
 
 // You can extend this function to return any other types your class implements.
-void* CustomAbilityConcept::Cast(uint32_t type) const
+void* AbilityManager::Cast(uint32_t type) const
 {
 	CLASS_CAST(Object);
-	CLASS_CAST(CustomAbilityConcept);
+	CLASS_CAST(AbilityManager);
 	return nullptr;
 }
 
-bool CustomAbilityConcept::HandleMessage(uint32_t messageID, void* msg)
+bool AbilityManager::HandleMessage(uint32_t messageID, void* msg)
 {
+	App::ConsolePrintF("aea");
 	//Anim::AnimationMessage
 	if (messageID == 0x635E7BCA)
 	{
@@ -60,6 +61,7 @@ bool CustomAbilityConcept::HandleMessage(uint32_t messageID, void* msg)
 
 			if (crt != nullptr)
 			{
+
 				//SporeDebugPrint("%i", crt->field_E7C); //
 				target = crt->mpCombatantTarget;//field_E7C; //field_E7C seems to be the target
 				auto pos2 = target->ToSpatialObject()->GetPosition();
@@ -67,16 +69,34 @@ bool CustomAbilityConcept::HandleMessage(uint32_t messageID, void* msg)
 			}
 			if (crt != nullptr && target != nullptr)
 			{
-				DoAbility(crt,target,newMsg);
+				PropertyListPtr propList;
+				PropManager.GetPropertyList(uint32_t(newMsg->parameter1),GroupIDs::CreatureAbilities,propList);
+				CustomAbilityType ability
+				{
+					newMsg->parameter0
+					,propList
+				};
+				DoAbility(crt,target,newMsg, ability);
 				return true;
 			}
 	}
 	return false;
 }
 
-bool CustomAbilityConcept::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message)
+bool AbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType abilityType)
 {
-	target->SetHealthPoints(target->mHealthPoints - 5);
-	target->ToSpatialObject()->SetScale(target->ToSpatialObject()->mScale / 2);
+	target->SetHealthPoints(0);
+	//target->func18h(10000.0F, 1, 1, 1, 1);
+	if (target->mHealthPoints <= 0 && (Simulator::cCreatureAnimal*)target.get() != nullptr)
+	{
+		auto crt = (Simulator::cCreatureAnimal*)target.get();
+		SporeDebugPrint("%b", crt->field_F90);
+		crt->mbDead = 1;
+		crt->field_F90 = 1;
+		//target->func2Ch(0); func2Ch() fills up health bar?
+		
+		// field_80 says if it has infinite health or not
+	}
+	//target->ToSpatialObject()->SetScale(target->ToSpatialObject()->mScale / 2);
 	return false;
 }

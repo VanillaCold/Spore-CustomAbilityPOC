@@ -19,7 +19,7 @@
     <ClInclude Include="stdafx.h">
       <Filter>Internal</Filter>
     </ClInclude>
-    <ClInclude Include="CustomAbilityConcept.h">
+    <ClInclude Include="AbilityManager.h">
       <Filter>Spore - Custom Ability Concept</Filter>
     </ClInclude>
   </ItemGroup>
@@ -30,7 +30,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Internal</Filter>
     </ClCompile>
-    <ClCompile Include="CustomAbilityConcept.cpp">
+    <ClCompile Include="AbilityManager.cpp">
       <Filter>Spore - Custom Ability Concept</Filter>
     </ClCompile>
   </ItemGroup>

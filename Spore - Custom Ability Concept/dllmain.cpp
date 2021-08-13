@@ -1,6 +1,6 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
-#include "CustomAbilityConcept.h"
+#include "AbilityManager.h"
 
 void Initialize()
 {
@@ -11,7 +11,8 @@ void Initialize()
 	//  - Add new game modes
 	//  - Add new space tools
 	//  - Change materials
-	MessageManager.AddListener(new CustomAbilityConcept(), 0x635E7BCA);
+	AbilityManager* abilityManager;
+	MessageManager.AddListener(abilityManager, 0x635E7BCA);
 }
 
 void Dispose()

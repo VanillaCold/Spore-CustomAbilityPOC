@@ -98,7 +98,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CustomAbilityConcept.h">
+    <ClInclude Include="AbilityManager.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -106,7 +106,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CustomAbilityConcept.cpp">
+    <ClCompile Include="AbilityManager.cpp">
       <SubType>
       </SubType>
     </ClCompile>
