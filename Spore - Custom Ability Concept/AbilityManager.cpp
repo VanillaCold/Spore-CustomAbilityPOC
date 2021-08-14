@@ -2,36 +2,58 @@
 #include "AbilityManager.h"
 #include <Spore\Anim\AnimatedCreature.h>
 
-AbilityManager::AbilityManager()
+cAbilityManager::cAbilityManager()
 {
+	currentAbilities = {};
+	sInstance = this;
 }
 
 
-AbilityManager::~AbilityManager()
+cAbilityManager::~cAbilityManager()
 {
+	sInstance = nullptr;
 }
 
 // For internal use, do not modify.
-int AbilityManager::AddRef()
+int cAbilityManager::AddRef()
 {
 	return DefaultRefCounted::AddRef();
 }
 
 // For internal use, do not modify.
-int AbilityManager::Release()
+int cAbilityManager::Release()
 {
 	return DefaultRefCounted::Release();
 }
 
+cAbilityManager* cAbilityManager::Get()
+{
+	return sInstance;
+}
+
+void cAbilityManager::AddAbility(uint32_t abilityID, uint32_t animationID, uint32_t instanceID)
+{
+	auto ability = new CustomAbilityType();
+	ability->abilityType = abilityID;
+	ability->animationID = animationID;
+
+	PropertyListPtr propList;
+	PropManager.GetPropertyList(instanceID, GroupIDs::CreatureAbilities, propList);
+	ability->propList.attach(propList.get());
+	propList.detach();
+
+	currentAbilities.push_back(ability);
+}
+
 // You can extend this function to return any other types your class implements.
-void* AbilityManager::Cast(uint32_t type) const
+void* cAbilityManager::Cast(uint32_t type) const
 {
 	CLASS_CAST(Object);
-	CLASS_CAST(AbilityManager);
+	CLASS_CAST(cAbilityManager);
 	return nullptr;
 }
 
-bool AbilityManager::HandleMessage(uint32_t messageID, void* msg)
+bool cAbilityManager::HandleMessage(uint32_t messageID, void* msg)
 {
 	App::ConsolePrintF("aea");
 	//Anim::AnimationMessage
@@ -83,7 +105,7 @@ bool AbilityManager::HandleMessage(uint32_t messageID, void* msg)
 	return false;
 }
 
-bool AbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType abilityType)
+bool cAbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType abilityType)
 {
 	target->SetHealthPoints(0);
 	//target->func18h(10000.0F, 1, 1, 1, 1);
@@ -100,3 +122,6 @@ bool AbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, 
 	//target->ToSpatialObject()->SetScale(target->ToSpatialObject()->mScale / 2);
 	return false;
 }
+
+
+cAbilityManager* cAbilityManager::sInstance;

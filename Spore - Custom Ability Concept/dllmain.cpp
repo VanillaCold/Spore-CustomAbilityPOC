@@ -11,8 +11,10 @@ void Initialize()
 	//  - Add new game modes
 	//  - Add new space tools
 	//  - Change materials
-	AbilityManager* abilityManager;
+	cAbilityManager* abilityManager = new cAbilityManager();
+	
 	MessageManager.AddListener(abilityManager, 0x635E7BCA);
+	AbilityManager.AddAbility(id("InstaKill"), id("CustomAbilityPOC"), id("custom_pulseability"));
 }
 
 void Dispose()
