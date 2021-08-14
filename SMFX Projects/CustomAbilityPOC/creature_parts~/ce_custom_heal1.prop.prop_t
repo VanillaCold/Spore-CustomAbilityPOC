@@ -1,0 +1,11 @@
+key parent CreatureEditorTemplates!CreatureWeaponTemplate
+texts blockName
+	"Custom Ability (Heal lv 1)"
+end
+int32 modelCapabilityCall 6
+int32 modelPrice 0
+float modelScale 0.01
+float modelMinScale 0.0001
+float modelMaxScale 2
+float modelZCorpMinScale 10
+#bool modelUseSkin false

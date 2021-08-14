@@ -1,0 +1,29 @@
+key parent creatureabilityTemplates~!CreatureAbilityTemplate
+string16 description "Locating Call"
+uint32s creatureAbilityAnimationIDs
+	0x02481e03
+end
+int32 creatureAbilityCategory 2
+float creatureAbilityDamage 0
+texts creatureAbilityDescription
+	(Abilities!0x00000080) "Call out to find friendly creatures. The longer you hold the ability button down, the louder your creature calls! (PLACEHOLDER)"
+end
+float creatureAbilityEnergyCost 1
+texts creatureAbilityName
+	(Abilities!0x0000007f) "Locating Call (PLACEHOLDER)"
+end
+float creatureAbilityRange 10
+float creatureAbilityRefresh 0
+uint32s creatureAbilityRequiredCAPs
+	0x6c6c6163
+end
+int32 creatureAbilityType 16
+key verbIconCategory call
+key verbIconGameLayout 0xE7405CAA
+key verbIconImageID mv_call
+key verbIconLayout 0xBED39F24
+key verbIconRepresentativeAnimation 0x02481e03
+bool verbIconShowLevel false
+key verbIconStaticLayout 0xFC586CEC
+int32 verbIconTriggerKey 8
+bool verbIconUseDescription false

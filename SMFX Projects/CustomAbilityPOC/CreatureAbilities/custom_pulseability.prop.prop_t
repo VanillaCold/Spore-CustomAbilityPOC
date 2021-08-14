@@ -19,3 +19,4 @@ vector2s creatureAbilityRequiredCAPsMaxValueRange
 	(71, 71)
 end
 key verbIconRepresentativeAnimation 0x079992D7
+#int32 creatureAbilityCategory 0

@@ -1,4 +1,6 @@
 key parent Adventure_brushes~!TemplateManifest.prop
 keys validEditorKeys
 	creature_parts~!ce_custom
+	creature_parts~!ce_custom_heal1
+	creature_parts~!ce_custom_heal2
 end

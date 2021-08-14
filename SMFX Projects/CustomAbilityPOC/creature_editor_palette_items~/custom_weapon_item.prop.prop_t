@@ -16,5 +16,7 @@ int32s palettePagePartItemRows
 end
 keys palettePagePartItems
 	creature_parts~!ce_custom
+	creature_parts~!ce_custom_heal1
+	creature_parts~!ce_custom_heal2
 end
 key palettePagePartParentPage creature_editor_palette_pages~!custom_weapon_page

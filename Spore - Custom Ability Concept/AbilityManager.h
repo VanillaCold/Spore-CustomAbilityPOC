@@ -35,7 +35,7 @@ public:
 
 	void* Cast(uint32_t type) const override;
 	bool HandleMessage(uint32_t messageID, void* msg) override;
-	bool DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType abilityType);
+	bool DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType* abilityType);
 
 protected:
 	static cAbilityManager* sInstance;

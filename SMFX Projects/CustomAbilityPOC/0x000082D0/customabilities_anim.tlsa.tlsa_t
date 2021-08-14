@@ -8,3 +8,12 @@ anim CustomAbilityPOC "custom_attack"
 		animation "custom_attack"
 	end
 end
+
+anim HealingAbilityPOC "self_heal_anim"
+	endMode 1
+	allowLocomotion true
+	
+	choice
+		animation "self_heal_anim"
+	end
+end

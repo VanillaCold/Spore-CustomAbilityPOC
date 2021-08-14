@@ -80,6 +80,7 @@ bool cAbilityManager::HandleMessage(uint32_t messageID, void* msg)
 				}
 
 			}
+	
 
 			if (crt != nullptr)
 			{
@@ -91,35 +92,51 @@ bool cAbilityManager::HandleMessage(uint32_t messageID, void* msg)
 			}
 			if (crt != nullptr && target != nullptr)
 			{
-				PropertyListPtr propList;
-				PropManager.GetPropertyList(uint32_t(newMsg->parameter1),GroupIDs::CreatureAbilities,propList);
-				CustomAbilityType ability
+				CustomAbilityType* ability = nullptr;
+				for (int i = 0; i < currentAbilities.size(); i++)
 				{
-					newMsg->parameter0
-					,propList
-				};
-				DoAbility(crt,target,newMsg, ability);
+					uint32_t animID;
+					newMsg->pCreature->GetCurrentAnimation(&animID);
+					if (currentAbilities[i]->animationID == animID)
+					{
+						ability = currentAbilities[i];
+						break;
+					}
+				}
+				if (ability != nullptr) DoAbility(crt,target,newMsg, ability);
 				return true;
 			}
 	}
 	return false;
 }
 
-bool cAbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType abilityType)
+bool cAbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType* abilityType)
 {
-	target->SetHealthPoints(0);
-	//target->func18h(10000.0F, 1, 1, 1, 1);
-	if (target->mHealthPoints <= 0 && (Simulator::cCreatureAnimal*)target.get() != nullptr)
+	if (abilityType->abilityType == id("InstaKill"))
 	{
-		auto crt = (Simulator::cCreatureAnimal*)target.get();
-		SporeDebugPrint("%b", crt->field_F90);
-		crt->mbDead = 1;
-		crt->field_F90 = 1;
-		//target->func2Ch(0); func2Ch() fills up health bar?
-		
-		// field_80 says if it has infinite health or not
+		target->SetHealthPoints(0);
+		//target->func18h(10000.0F, 1, 1, 1, 1);
+		if (target->mHealthPoints <= 0 && object_cast<Simulator::cCreatureAnimal>(target.get()) != nullptr)
+		{
+			auto crt = (Simulator::cCreatureAnimal*)target.get();
+			SporeDebugPrint("%b", crt->field_F90);
+			crt->mbDead = 1;
+			crt->field_F90 = 1;
+			//target->func2Ch(0); func2Ch() fills up health bar?
+
+			// field_80 says if it has infinite health or not
+		}
+		return true;
+		//target->ToSpatialObject()->SetScale(target->ToSpatialObject()->mScale / 2);
 	}
-	//target->ToSpatialObject()->SetScale(target->ToSpatialObject()->mScale / 2);
+
+	if (abilityType->abilityType == id("SelfHeal"))
+	{
+		uint32_t level;
+		App::Property::GetUInt32(abilityType->propList.get(), id("SelfHealAbility-HealingLevel"), level);
+		source->SetHealthPoints(source->mHealthPoints + (5*level));
+	}
+
 	return false;
 }
 

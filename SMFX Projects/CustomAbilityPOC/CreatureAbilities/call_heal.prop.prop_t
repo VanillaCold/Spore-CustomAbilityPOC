@@ -1,0 +1,19 @@
+key parent creatureabilityTemplates~!CallTemplate
+uint32s creatureAbilityAnimationIDs
+	hash(HealingAbilityPOC)
+end
+key verbTrayRepresentativeAnimation hash(HealingAbilityPOC)
+uint32 creatureAbilityBabyGameAnimationID hash(HealingAbilityPOC)
+vector2s creatureAbilityRequiredCAPsMaxValueRange
+	(6, 6)
+end
+uint32 SelfHealAbility-HealingLevel 1
+#SelfHeal
+texts creatureAbilityName
+	"Healing Spark - Level 1"
+end
+texts creatureAbilityDescription
+	"Heals 5 HP when used."
+end
+int32 creatureAbilityCategory 0
+int32 creatureAbilityType 32

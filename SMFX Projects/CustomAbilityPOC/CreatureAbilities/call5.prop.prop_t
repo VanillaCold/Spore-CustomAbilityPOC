@@ -1,0 +1,4 @@
+key parent creatureabilityTemplates~!CallTemplate
+vector2s creatureAbilityRequiredCAPsMaxValueRange
+	(5, 5)
+end
