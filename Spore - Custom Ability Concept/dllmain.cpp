@@ -1,6 +1,8 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 #include "AbilityManager.h"
+#include "cInstaKillAbility.h"
+#include "cSelfHealAbility.h"
 
 void Initialize()
 {
@@ -11,12 +13,16 @@ void Initialize()
 	//  - Add new game modes
 	//  - Add new space tools
 	//  - Change materials
-	cAbilityManager* abilityManager = new cAbilityManager();
+	cAbilityManager* abilityManager = new cAbilityManager(); //create the AbilityManager
 	
-	MessageManager.AddListener(abilityManager, 0x635E7BCA);
-	AbilityManager.AddAbility(id("InstaKill"), id("CustomAbilityPOC"), id("custom_pulseability"));
-	AbilityManager.AddAbility(id("SelfHeal"), id("HealingAbilityPOC"), id("call_heal"));
-	AbilityManager.AddAbility(id("SelfHeal"), id("HealingAbility2POC"), id("call_heal_2"));
+	MessageManager.AddListener(abilityManager, 0x635E7BCA); //make the Ability Manager function
+	AbilityManager.CreateAbility(id("InstaKill"), id("custom_pulseability"), id("CustomAbilityPOC"), new cInstaKillAbility()); //cInstaKillAbility is an example of an ability that interacts with the target
+	AbilityManager.CreateAbility(id("SelfHeal"), id("call_heal"), id("HealingAbilityPOC"), new cSelfHealAbility()); //cSelfHealAbility is an example of an ability that uses its Property List.
+	AbilityManager.CreateAbility(id("SelfHeal"), id("call_heal_2"), id("HealingAbility2POC"), new cSelfHealAbility());
+	
+	//AbilityManager.AddAbility(id("InstaKill"), id("CustomAbilityPOC"), id("custom_pulseability"));
+	//AbilityManager.AddAbility(id("SelfHeal"), id("HealingAbilityPOC"), id("call_heal"));
+	//AbilityManager.AddAbility(id("SelfHeal"), id("HealingAbility2POC"), id("call_heal_2"));
 }
 
 void Dispose()

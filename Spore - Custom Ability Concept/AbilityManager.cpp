@@ -14,6 +14,8 @@ cAbilityManager::~cAbilityManager()
 	sInstance = nullptr;
 }
 
+cAbilityManager* cAbilityManager::sInstance;
+
 // For internal use, do not modify.
 int cAbilityManager::AddRef()
 {
@@ -31,19 +33,6 @@ cAbilityManager* cAbilityManager::Get()
 	return sInstance;
 }
 
-void cAbilityManager::AddAbility(uint32_t abilityID, uint32_t animationID, uint32_t instanceID)
-{
-	auto ability = new CustomAbilityType();
-	ability->abilityType = abilityID;
-	ability->animationID = animationID;
-
-	PropertyListPtr propList;
-	PropManager.GetPropertyList(instanceID, GroupIDs::CreatureAbilities, propList);
-	ability->propList.attach(propList.get());
-	propList.detach();
-
-	currentAbilities.push_back(ability);
-}
 
 // You can extend this function to return any other types your class implements.
 void* cAbilityManager::Cast(uint32_t type) const
@@ -57,7 +46,7 @@ bool cAbilityManager::HandleMessage(uint32_t messageID, void* msg)
 {
 	App::ConsolePrintF("aea");
 	//Anim::AnimationMessage
-	if (messageID == 0x635E7BCA)
+	if (messageID == 0x635E7BCA) //Only accept this message ID, and no others
 	{
 		SporeDebugPrint("Triggered custom behaviour!");
 		auto newMsg = (Anim::AnimationMessage*)msg; //use casting to get an Anim::AnimationMessage from the msg variable
@@ -65,52 +54,77 @@ bool cAbilityManager::HandleMessage(uint32_t messageID, void* msg)
 			auto pos = newMsg->pCreature->mPosition; //get the creature's position
 			SporeDebugPrint("Position of creature that triggered event: X = %f, Y = %f, Z = %f", pos.x, pos.y, pos.z); //print the creature's position to the debug console
 
-			cCreatureAnimalPtr crt = nullptr;
+			cCreatureAnimalPtr crt = nullptr; //create two pointers and set them to nullptr
 			cCombatantPtr target = nullptr;
-			for (auto creature : Simulator::GetData<Simulator::cCreatureAnimal>()) {
-				if (creature->mpAnimatedCreature.get() == newMsg->pCreature && crt == nullptr)
+			for (auto creature : Simulator::GetData<Simulator::cCreatureAnimal>()) { //loop through all creatures
+				if (creature->mpAnimatedCreature.get() == newMsg->pCreature && crt == nullptr) //if the current creature is the owner of the AnimatedCreature that triggered the event, do the following
 				{
-					SporeDebugPrint("Found creature that triggered ability");
-					if (creature.get() == GameNounManager.GetAvatar())
+					SporeDebugPrint("Found creature that triggered ability"); //Print it to the debug console when compiled as a debug DLL
+					if (creature.get() == GameNounManager.GetAvatar()) //if the trigger creature is the avatar, print it to the debug console when compiled as a debug DLL
 					{
 						SporeDebugPrint("Trigger is the avatar!");
 					}
-					crt = creature;
-					break;
+					crt = creature; //set the crt pointer to the current creature
+					break; //Leave the loop, as the creature was found.
 				}
 
 			}
 	
 
-			if (crt != nullptr)
+			if (crt != nullptr) //If the creature is not nullptr...
 			{
 
 				//SporeDebugPrint("%i", crt->field_E7C); //
-				target = crt->mpCombatantTarget;//field_E7C; //field_E7C seems to be the target
-				auto pos2 = target->ToSpatialObject()->GetPosition();
-				SporeDebugPrint("Position of combatant that was targetted by player: X = %f, Y = %f, Z = %f", pos2.x, pos2.y, pos2.z); //print the creature's position to the debug console
-			}
-			if (crt != nullptr && target != nullptr)
-			{
-				CustomAbilityType* ability = nullptr;
-				for (int i = 0; i < currentAbilities.size(); i++)
+				target = crt->mpCombatantTarget; //Find the creature's target
+				auto pos2 = target->ToSpatialObject()->GetPosition(); //Get the target's position
+				SporeDebugPrint("Position of combatant that was targetted by player: X = %f, Y = %f, Z = %f", pos2.x, pos2.y, pos2.z); //print the creature's position to the debug console when compiled as a debug DLL
+
+				ICreatureAbilityPtr ability = nullptr; //create an ICreatureAbilityPtr (see ICreatureAbility.h)
+
+				uint32_t animID; //create a new uint32_t
+				newMsg->pCreature->GetCurrentAnimation(&animID); //Set the animID variable to the trigger's current animation
+
+				for (int i = 0; i < currentAbilities.size(); i++) //loop through all custom abilities and do the following for each
 				{
-					uint32_t animID;
-					newMsg->pCreature->GetCurrentAnimation(&animID);
-					if (currentAbilities[i]->animationID == animID)
+					if (currentAbilities[i]->animationID == animID) // If the ability's animation ID is equal to the trigger's current animation...
 					{
-						ability = currentAbilities[i];
-						break;
+						ability = currentAbilities[i]; //Set the contents of the ability pointer
+						ability->OnUse(crt, target, newMsg); //Trigger the ability's OnUse() function
+						return true; //Returns true, as the ability has been found. 
 					}
 				}
-				if (ability != nullptr) DoAbility(crt,target,newMsg, ability);
-				return true;
 			}
 	}
-	return false;
+	return false; //Returns false if the message is incorrect, if there is no found trigger or if the trigger's animation doesn't match any abilities.
 }
 
-bool cAbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType* abilityType)
+ICreatureAbility* cAbilityManager::CreateAbility(uint32_t type, uint32_t instanceID, uint32_t animation, ICreatureAbility* ability)
+{
+	ability->abilityType = type; //Set the ability's ID
+
+	PropManager.GetPropertyList(instanceID, GroupIDs::CreatureAbilities, ability->abilityPropList); //Gets the ability's property list and attaches it to the abilityPropList variable
+
+	ability->animationID = animation; //Sets the ability's animation ID, which tells Spore when to use
+	currentAbilities.push_back(ability); //Adds the ability to currentAbilities
+	return ability; //return the ability, in case it's needed for something else
+}
+
+
+//Depricated functions below
+
+/*void cAbilityManager::AddAbility(ICreatureAbility* ability)
+{
+	/*auto ability = new CustomAbilityType();
+	ability->abilityType = abilityID;
+	ability->animationID = animationID;
+
+	PropertyListPtr propList;
+	PropManager.GetPropertyList(instanceID, GroupIDs::CreatureAbilities, propList);
+	ability->propList.attach(propList.get());
+	propList.detach();
+}*/
+
+/*bool cAbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target, Anim::AnimationMessage* message, CustomAbilityType* abilityType)
 {
 	if (abilityType->abilityType == id("InstaKill"))
 	{
@@ -138,7 +152,4 @@ bool cAbilityManager::DoAbility(cCreatureAnimalPtr source, cCombatantPtr target,
 	}
 
 	return false;
-}
-
-
-cAbilityManager* cAbilityManager::sInstance;
+}*/

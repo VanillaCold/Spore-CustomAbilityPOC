@@ -102,11 +102,31 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="cInstaKillAbility.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="cSelfHealAbility.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ICreatureAbility.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbilityManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="cInstaKillAbility.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="cSelfHealAbility.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -117,6 +137,10 @@
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ICreatureAbility.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

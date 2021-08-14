@@ -1,0 +1,22 @@
+key parent creatureabilityTemplates~!CreatureAbilityTemplate
+string16 description "Block"
+int32 creatureAbilityCategory 2
+texts creatureAbilityDescription
+	(Abilities!0x00000016) "During combat, use block to avoid damage. (PLACEHOLDER)"
+end
+float creatureAbilityDuration 2
+texts creatureAbilityName
+	(Abilities!0x00000015) "Block (PLACEHOLDER)"
+end
+float creatureAbilityRefresh 10
+uint32s creatureAbilityRequiredCAPs
+	0x6b636c62
+end
+int32 creatureAbilityType 15
+key verbIconCategory block
+key verbIconGameLayout 0xAE2CBB58
+key verbIconImageID 0x80E591EF
+key verbIconLayout 0x05722A76
+key verbIconStaticLayout 0x024732B2
+int32 verbIconTriggerKey -1
+bool verbIconUseDescription false

@@ -2,7 +2,7 @@ key parent CreatureEditorTemplates!CreatureWeaponTemplate
 texts blockName
 	"Custom Ability (Heal lv 2)"
 end
-int32 modelCapabilityCall 7
+int32 modelCapabilityBlock 7
 int32 modelPrice 0
 float modelScale 0.01
 float modelMinScale 0.0001

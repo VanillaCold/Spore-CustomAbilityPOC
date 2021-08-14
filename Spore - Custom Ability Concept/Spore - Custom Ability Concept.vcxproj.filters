@@ -11,6 +11,21 @@
     <Filter Include="Internal">
       <UniqueIdentifier>{d62ad12d-69d8-4933-8342-03043c9adc22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Spore - Custom Ability Concept\ICreatureAbility">
+      <UniqueIdentifier>{ae40678c-6a4c-47f2-afe1-97981afd3935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spore - Custom Ability Concept\AbilityManager">
+      <UniqueIdentifier>{201c2a72-02be-4fab-bb7b-f06166e75ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spore - Custom Ability Concept\Creature Abilities">
+      <UniqueIdentifier>{66ac6373-d8d5-4093-9930-7db422b538d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spore - Custom Ability Concept\Creature Abilities\cInstaKillAbility">
+      <UniqueIdentifier>{2a2ca6ee-f4fd-436c-b003-1506f73cb79b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spore - Custom Ability Concept\Creature Abilities\cSelfHealAbility">
+      <UniqueIdentifier>{fb4d86dc-9639-4657-8000-b04dec7accd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -20,7 +35,16 @@
       <Filter>Internal</Filter>
     </ClInclude>
     <ClInclude Include="AbilityManager.h">
-      <Filter>Spore - Custom Ability Concept</Filter>
+      <Filter>Spore - Custom Ability Concept\AbilityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ICreatureAbility.h">
+      <Filter>Spore - Custom Ability Concept\ICreatureAbility</Filter>
+    </ClInclude>
+    <ClInclude Include="cInstaKillAbility.h">
+      <Filter>Spore - Custom Ability Concept\Creature Abilities\cInstaKillAbility</Filter>
+    </ClInclude>
+    <ClInclude Include="cSelfHealAbility.h">
+      <Filter>Spore - Custom Ability Concept\Creature Abilities\cSelfHealAbility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +55,16 @@
       <Filter>Internal</Filter>
     </ClCompile>
     <ClCompile Include="AbilityManager.cpp">
-      <Filter>Spore - Custom Ability Concept</Filter>
+      <Filter>Spore - Custom Ability Concept\AbilityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ICreatureAbility.cpp">
+      <Filter>Spore - Custom Ability Concept\ICreatureAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="cInstaKillAbility.cpp">
+      <Filter>Spore - Custom Ability Concept\Creature Abilities\cInstaKillAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="cSelfHealAbility.cpp">
+      <Filter>Spore - Custom Ability Concept\Creature Abilities\cSelfHealAbility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
