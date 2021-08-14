@@ -1,6 +1,6 @@
 key parent creatureabilityTemplates~!CallTemplate
 uint32s creatureAbilityAnimationIDs
-	hash(HealingAbility2POC)
+	hash(HealingAbility2POC) #this custom animation is used to trigger the SelfHeal ability
 end
 key verbTrayRepresentativeAnimation hash(HealingAbilityPOC)
 uint32 creatureAbilityBabyGameAnimationID hash(HealingAbilityPOC)

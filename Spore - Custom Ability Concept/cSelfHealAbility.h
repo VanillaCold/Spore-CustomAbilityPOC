@@ -6,9 +6,7 @@
 #define cSelfHealAbilityPtr intrusive_ptr<cSelfHealAbility>
 
 class cSelfHealAbility 
-	: public Object
-	, public DefaultRefCounted
-	, public ICreatureAbility
+	: public ICreatureAbility
 {
 public:
 	static const uint32_t TYPE = id("cSelfHealAbility");

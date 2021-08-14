@@ -6,9 +6,7 @@
 #define cInstaKillAbilityPtr intrusive_ptr<cInstaKillAbility>
 
 class cInstaKillAbility 
-	: public Object
-	, public DefaultRefCounted
-	, public ICreatureAbility
+	: public ICreatureAbility
 {
 public:
 	static const uint32_t TYPE = id("cInstaKillAbility");

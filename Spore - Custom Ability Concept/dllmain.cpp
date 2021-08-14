@@ -15,7 +15,7 @@ void Initialize()
 	//  - Change materials
 	cAbilityManager* abilityManager = new cAbilityManager(); //create the AbilityManager
 	
-	MessageManager.AddListener(abilityManager, 0x635E7BCA); //make the Ability Manager function
+	MessageManager.AddListener(abilityManager, id("AnimationManager_Message")); //make the Ability Manager function
 	AbilityManager.CreateAbility(id("InstaKill"), id("custom_pulseability"), id("CustomAbilityPOC"), new cInstaKillAbility()); //cInstaKillAbility is an example of an ability that interacts with the target
 	AbilityManager.CreateAbility(id("SelfHeal"), id("call_heal"), id("HealingAbilityPOC"), new cSelfHealAbility()); //cSelfHealAbility is an example of an ability that uses its Property List.
 	AbilityManager.CreateAbility(id("SelfHeal"), id("call_heal_2"), id("HealingAbility2POC"), new cSelfHealAbility());

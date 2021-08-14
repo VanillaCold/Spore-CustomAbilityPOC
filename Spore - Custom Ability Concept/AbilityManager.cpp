@@ -46,7 +46,7 @@ bool cAbilityManager::HandleMessage(uint32_t messageID, void* msg)
 {
 	App::ConsolePrintF("aea");
 	//Anim::AnimationMessage
-	if (messageID == 0x635E7BCA) //Only accept this message ID, and no others
+	if (messageID == id("AnimationManager_Message")) //Only accept this message ID, and no others
 	{
 		SporeDebugPrint("Triggered custom behaviour!");
 		auto newMsg = (Anim::AnimationMessage*)msg; //use casting to get an Anim::AnimationMessage from the msg variable

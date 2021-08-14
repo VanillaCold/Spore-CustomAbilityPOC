@@ -1,7 +1,7 @@
 key parent creatureabilityTemplates~!SpitTemplate
 float creatureAbilityAdventurerEnergyCost 0
 uint32s creatureAbilityAnimationIDs
-	0x8C264220
+	0x8C264220 #this custom animation is used to trigger the InstaKill ability
 end
 uint32 creatureAbilityBabyGameAnimationID 0x07620ddb
 float creatureAbilityDamage 0

@@ -1,9 +1,0 @@
-length 1
-
-event event0 customability_message -type message -id 0x635E7BCA -flags 0x60 #-param0 custom_attack custom_attack -param1 0xFC9294F8 0xFC9294F8 
-end
-channel root root -blendGroup 0
-	info
-		0 -event event0
-	end
-end

@@ -5,7 +5,7 @@ anim CustomAbilityPOC "custom_attack"
 	allowLocomotion true
 
 	choice -probability 1
-		animation "custom_attack"
+		animation "custom_attack" #All three animations use the same file - they only have different IDs so that the AbilityManager can distinguish them
 	end
 end
 
@@ -14,7 +14,7 @@ anim HealingAbilityPOC "self_heal_anim"
 	allowLocomotion true
 	
 	choice
-		animation "self_heal_anim"
+		animation "custom_attack"
 	end
 end
 
@@ -23,6 +23,6 @@ anim HealingAbility2POC "self_heal_anim"
 	allowLocomotion true
 	
 	choice
-		animation "self_heal_anim"
+		animation "custom_attack"
 	end
 end
