@@ -16,7 +16,7 @@ void Initialize()
 	MessageManager.AddListener(abilityManager, 0x635E7BCA);
 	AbilityManager.AddAbility(id("InstaKill"), id("CustomAbilityPOC"), id("custom_pulseability"));
 	AbilityManager.AddAbility(id("SelfHeal"), id("HealingAbilityPOC"), id("call_heal"));
-	AbilityManager.AddAbility(id("SelfHeal"), id("HealingAbilityPOC"), id("call_heal_2"));
+	AbilityManager.AddAbility(id("SelfHeal"), id("HealingAbility2POC"), id("call_heal_2"));
 }
 
 void Dispose()

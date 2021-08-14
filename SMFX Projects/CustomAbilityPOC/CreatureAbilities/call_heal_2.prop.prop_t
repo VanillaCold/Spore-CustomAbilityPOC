@@ -1,6 +1,6 @@
 key parent creatureabilityTemplates~!CallTemplate
 uint32s creatureAbilityAnimationIDs
-	hash(HealingAbilityPOC)
+	hash(HealingAbility2POC)
 end
 key verbTrayRepresentativeAnimation hash(HealingAbilityPOC)
 uint32 creatureAbilityBabyGameAnimationID hash(HealingAbilityPOC)
