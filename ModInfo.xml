@@ -1,4 +1,4 @@
-<mod displayName="Custom Ability POC" unique="chocice75_customabilityproofofconceptthingymod" description="Adds two custom abilities that use custom code, as a proof-of-concept." installerSystemVersion="1.0.1.1" hasCustomInstaller="true" dllsBuild="2.5.20">
+<mod displayName="Custom Ability POC" unique="chocice75_customabilityproofofconceptthingymod" description="Adds two custom abilities that use custom code, as a proof-of-concept." installerSystemVersion="1.0.1.1" hasCustomInstaller="true" dllsBuild="2.5.20" isExperimental="true">
 	<prerequisite>Spore-CustomAbilityConcept.dll</prerequisite>
 	<prerequisite game="GalacticAdventures">!!!CustomAbilityPOC.package</prerequisite>
 </mod>
